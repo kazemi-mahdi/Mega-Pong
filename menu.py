@@ -190,3 +190,32 @@ class CreditsMenu(Menu):
             self.game.draw_text('Credits', 20, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 20)
             self.game.draw_text('Made by me', 15, self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 + 10)
             self.blit_screen()
+            
+            
+
+try:
+    font = pygame.font.Font("Assets/fonts/PRESSSTART2P-VAV7.TTF", 20)
+except:
+    print("Font file not found! Make sure 'PressStart2P-Regular.ttf' is in the Clouds 3 folder")
+    font = pygame.font.SysFont('PressStart2P-Regular', 36)
+         
+class Button:
+    def __init__(self, x, y, text):
+        self.text = font.render(text, True, (240, 240, 240))
+        self.rect = self.text.get_rect()
+        self.rect.center = (x, y)
+        
+    def draw(self, surface):
+        surface.blit(self.text, self.rect)
+        
+    def is_clicked(self, pos):
+        return self.rect.collidepoint(pos)           
+            
+class MenuSystem():
+    def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN):
+        self.screen_width = SCREEN_WIDTH
+        self.screen_height = SCREEN_HEIGHT
+        self.screen = SCREEN
+        
+    def Draw_MainMenu():
+        pass
