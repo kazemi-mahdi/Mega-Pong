@@ -9,17 +9,17 @@ class Settings:
     def __init__(self):
         """Initialize the game's settings."""
         # Screen settings
-        self.screen_full_width = pygame.display.Info().current_w
+        self.screen_full_width  = pygame.display.Info().current_w
         self.screen_full_height = pygame.display.Info().current_h
-        self.screen_half_width = self.screen_full_width / 2
+        self.screen_half_width  = self.screen_full_width / 2
         self.screen_half_height = self.screen_full_height / 2
 
         self.FPS = 60  # frames per second
 
         # Color
-        self.white = pygame.Color("white")
-        self.black = pygame.Color("black")
-        self.bg_color = pygame.Color("grey12")
+        self.white      = pygame.Color("white")
+        self.black      = pygame.Color("black")
+        self.bg_color   = pygame.Color("grey12")
         self.light_grey = (200, 200, 200)
 
         # Wall settings
@@ -27,7 +27,7 @@ class Settings:
         self.PI = pi
 
         self.useless_area = (ceil(
-            self.screen_full_width - (self.screen_full_height / self.goldenRatio)) / 2)  # The useless area
+        self.screen_full_width - (self.screen_full_height / self.goldenRatio)) / 2)  # The useless area
         self.usefull_area = ceil((self.screen_full_height / self.goldenRatio))  # The usefull area
 
         self.wall_thickness = 5  # in pixels
@@ -122,4 +122,8 @@ class Settings:
         self.selected_sound = pygame.mixer.Sound("Assets/soundtracks/selected.wav")
         self.paddle_hit_sound = pygame.mixer.Sound("Assets/soundtracks/hit-new.wav")
         self.wall_hit_sound = pygame.mixer.Sound("Assets/soundtracks/ball fall.wav")
-
+        
+        
+        #Fonts
+        self.font_size = 20
+        self.arcade_font = pygame.font.Font("Assets/fonts/PRESSSTART2P-VAV7.TTF", self.font_size)
