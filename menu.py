@@ -1,5 +1,6 @@
 import pygame
-
+import math
+import os
 
 class Menu():
     def __init__(self, game):
@@ -192,7 +193,7 @@ class CreditsMenu(Menu):
             self.blit_screen()
             
             
-
+pygame.init()
 try:
     font = pygame.font.Font("Assets/fonts/PRESSSTART2P-VAV7.TTF", 20)
 except:
@@ -217,5 +218,35 @@ class MenuSystem():
         self.screen_height = SCREEN_HEIGHT
         self.screen = SCREEN
         
-    def Draw_MainMenu():
-        pass
+    
+    def Draw_BackGround(self):
+        scroll = 0
+        bg_images = []
+        
+        for i in range(1, 5):
+            bg_image = pygame.image.load(f"{os.path.join(os.getcwd(),"Assets", "bg_images")}\\layer-{i}.png").convert_alpha()
+            bg_images.append(bg_image)
+        
+        bg_width = self.bg_images[0].get_width()
+        tiles = math.ceil(self.screen_width / bg_width) + 1
+        layer_speeds = [0.2, 0, 0.6, 0.8]  # Moon (layer 2) has speed 0 to stay fixed
+        
+        for x in range(0, tiles + 1):
+            pos_x = ((x * bg_width) - (scroll * layer_speeds[0])) % (bg_width * tiles)
+            self.screen.blit(self.bg_images[0], (pos_x - bg_width, 0))
+            
+        moon_x = (self.screen_width - bg_images[1].get_width()) // 2
+        self.screen.blit(bg_images[1], (moon_x, 0))
+        
+        for layer in [2, 3]:  # indices for layers 3 and 4
+            for x in range(0, tiles + 1):
+                pos_x = ((x * bg_width) - (self.scroll * layer_speeds[layer])) % (bg_width * tiles)
+                self.screen.blit(bg_images[layer], (pos_x - bg_width, 0))
+        
+        
+    def Draw_MainMenu(self):
+        play_button = Button(self.screen_width // 2, self.screen_height // 2, "Play!")
+        self.Draw_BackGround()
+        play_button.draw(self.screen)
+        self.scroll += 2
+        
